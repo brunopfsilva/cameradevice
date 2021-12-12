@@ -9,6 +9,8 @@ const { Camera } = Plugins;
 })
 export class FotoService {
 
+  public fotos: Foto[] = []; 
+
   constructor() { }
 
   public async addNewToGallery(){
@@ -17,6 +19,20 @@ export class FotoService {
       source: CameraSource.Camera,
       quality: 100
     });
+    //unshift adiciona info no inicio do array
+    this.fotos.unshift({
+      webviewPath: capturedPhoto.webPath
+    });
   }
 
+  public deletePhoto(index: number){
+    //funcao splice recebe index como paramentro e deleta uma posicao
+    this.fotos.splice(index, 1);
+  }
+
+}
+
+export interface Foto {
+  webviewPath: string;
+  base64?: string;
 }
